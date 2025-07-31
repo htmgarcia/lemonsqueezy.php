@@ -70,6 +70,21 @@ class License extends AbstractApi
         }
     }
 
+    public function validateLicense(string $licenseKey, string $instanceId): null|bool
+    {
+        try {
+            $response = $this->post('/licenses/validate', [
+                'license_key' => $licenseKey,
+                'instance_id' => $instanceId,
+            ]);
+
+            return $response->valid ?? false;
+        } catch (\Throwable $e) {
+            // Likely not valid license key...
+            return false;
+        }
+    }
+
     public function getAllLicenseInstances(): array
     {
         $licenseInstances = $this->get('/license-key-instances?page=1&page[size]=100');

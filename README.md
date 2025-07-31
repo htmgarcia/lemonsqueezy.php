@@ -144,6 +144,13 @@ $response = $lemonSqueeze->activateLicense(
 
 // Deactivate license
 $response = $lemonSqueeze->deactivateLicense(
+    'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', // License key
+    'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // Instance id (NOT license key!)
+);
+
+// Validate license
+$response = $lemonSqueeze->validateLicense(
+    'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', // License key
     'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // Instance id (NOT license key!)
 );
 ```
