@@ -7,6 +7,7 @@ namespace LemonSqueezy\API;
 use function array_map;
 
 use LemonSqueezy\Entity\License as LicenseEntity;
+use LemonSqueezy\Entity\LicenseInstance as LicenseInstanceEntity;
 
 class License extends AbstractApi
 {
@@ -42,5 +43,54 @@ class License extends AbstractApi
         $licenseEntity->id = (int) $license->data->id;
 
         return $licenseEntity;
+    }
+
+    public function activateLicense(string $licenseKey, string $instanceName): \stdClass
+    {
+         $response = $this->post('/licenses/activate', [
+            'license_key' => $licenseKey,
+            'instance_name' => $instanceName,
+        ]);
+
+        return $response;
+    }
+
+    public function deactivateLicense(string $licenseKey, string $instanceId): \stdClass|null
+    {
+        try {
+            $response = $this->post('/licenses/deactivate', [
+                'license_key' => $licenseKey,
+                'instance_id' => $instanceId,
+            ]);
+
+            return $response;
+        } catch (\Throwable $e) {
+            // Can't deactivate license. Request failed.
+            return null;
+        }
+    }
+
+    public function getAllLicenseInstances(): array
+    {
+        $licenseInstances = $this->get('/license-key-instances?page=1&page[size]=100');
+
+        return array_map(function ($licenseInstance) {
+            $licenseInstanceEntity = new LicenseInstanceEntity($licenseInstance->attributes);
+            $licenseInstanceEntity->id = (int) $licenseInstance->id;
+
+            return $licenseInstanceEntity;
+        }, $licenseInstances->data);
+    }
+
+    /**
+     * Get license instance
+     * 
+     * @param int $instanceId Is a number, not a string!
+     */
+    public function getLicenseInstance(int $instanceId): \stdClass
+    {
+        $response = $this->get('/license-key-instances/' . $instanceId);
+
+        return $response->data;
     }
 }

@@ -15,7 +15,6 @@ use LemonSqueezy\API\Product;
 use LemonSqueezy\API\Store;
 use LemonSqueezy\API\User;
 use LemonSqueezy\API\License;
-use LemonSqueezy\API\LicenseInstance;
 use LemonSqueezy\HttpClient\Builder;
 use LemonSqueezy\HttpClient\Plugin\Authentication;
 use LemonSqueezy\HttpClient\Plugin\ExceptionThrower;
@@ -78,11 +77,6 @@ class LemonSqueezy
     public function license(): License
     {
         return new License($this);
-    }
-
-    public function licenseInstance(): LicenseInstance
-    {
-        return new LicenseInstance($this);
     }
 
     public function authenticate(string $apiKey): void

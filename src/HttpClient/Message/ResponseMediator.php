@@ -25,6 +25,7 @@ final class ResponseMediator
 {
     public const CONTENT_TYPE_HEADER = 'Content-Type';
     public const JSON_CONTENT_TYPE = 'application/vnd.api+json';
+    public const STANDARD_JSON_CONTENT_TYPE = 'application/json';
 
     public static function getContent(ResponseInterface $response): stdClass
     {
@@ -38,8 +39,11 @@ final class ResponseMediator
             return JsonObject::empty();
         }
 
-        if (! str_starts_with(self::getHeader($response, self::CONTENT_TYPE_HEADER) ?? '', self::JSON_CONTENT_TYPE)) {
-            throw new RuntimeException(sprintf('The content type was not %s.', self::JSON_CONTENT_TYPE));
+        $contentType = self::getHeader($response, self::CONTENT_TYPE_HEADER) ?? '';
+
+        if (! str_starts_with($contentType, 'application/vnd.api+json') &&
+            ! str_starts_with($contentType, 'application/json')) {
+            throw new RuntimeException(sprintf('Unexpected content type: %s.', $contentType));
         }
 
         return JsonObject::decode($body);
