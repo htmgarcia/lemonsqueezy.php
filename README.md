@@ -1,4 +1,20 @@
-This is a fork from [seisigmasrl](https://github.com/seisigmasrl/lemonsqueezy.php).
+This is a fork from [seisigmasrl](https://github.com/seisigmasrl/lemonsqueezy.php). 
+
+To use my fork in composer, point to this repository by editing your composer.json file.
+
+```
+{
+  "require": {
+    "seisigmasrl/lemonsqueezy-php": "dev-develop"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/htmgarcia/lemonsqueezy.php"
+    }
+  ]
+}
+```
 
 ```php
 # Initializing the Package
