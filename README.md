@@ -154,3 +154,24 @@ $response = $lemonSqueeze->validateLicense(
     'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' // Instance id (NOT license key!)
 );
 ```
+
+### File
+
+Get the download files data, including download URL and version.
+
+```php
+<?php
+# Initialize the Package from the step before
+...
+// https://docs.lemonsqueezy.com/api/files/the-file-object
+$lemonSqueeze = $client->file();
+
+// List all files data
+$files = $lemonSqueeze->getAllFiles();
+
+// Get a single file data
+$file = $lemonSqueeze->getFile(123); // Get the file with ID: 123
+
+// Get a single file data by variant ID
+$file = $lemonSqueeze->getFileByVariantId(123); // Variant ID is attached to the activation data
+```
