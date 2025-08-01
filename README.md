@@ -97,7 +97,7 @@ $productVariants = $lemonSqueeze->getProductVariants(59920);         // Get all 
 $productWithVariants = $lemonSqueeze->getProductWithVariants(59920); // Get a Product with All their Variants
 ```
 
-### License Keys
+### License Key
 
 These are methods to retrieve license keys only. Doesn't include activations/deactivations neither instances.
 
@@ -112,7 +112,7 @@ $storeLicenses = $lemonSqueeze->getStoreLicenses(123);  // List all Licenses for
 $license = $lemonSqueeze->getLicense(123); // Get the License key ID: 123
 ```
 
-### License Instances
+### License Instance
 
 These are licenses instances (is NOT license key!) that has been either activated, deactivated, expired, etc.
 
